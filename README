@@ -1,0 +1,46 @@
+------------------------------------------------------------------------------
+                              Tema 1 - IOCLA
+------------------------------------------------------------------------------
+
+
+Autor
+  Smadu Razvan-Alexandru  325CB
+
+Fisiere incluse
+  - tema1.asm
+  - README
+
+README
+  Utilizarea registrelor:
+    EAX - contine numarul de convertit, respectiv caturile la impartire, iar la
+          la final este folosit pentru afisarea fiecarui caracter
+    EBX - contine baza in catre trebuie sa se faca conversia
+    ECX - este folosit ca un contor pentru bucla  prin care se trece prin
+          fiecare numar care urmeaza a fi convertit
+    EDX - contine resturile de la impartire. In el este retinuta si valoarea
+          convertita in ASCII. 
+    ESI - Contine numarul de caractere din numarul convertit. Este folosit la 
+          afisarea numarului.
+    EDI - Este folosit ca un index pentru parcurgerea prin vectorii de numere,
+          respectiv baze.
+
+  Implementarea temei:
+    Se extrag, pe rand, fiecare numar si baza asociata in registrele EAX, 
+	respectiv EBX. Se verifica daca baza indeplineste conditiile, in caz
+	negativ se afiseaza "Baza incorecta".  Se initializara partea high a 
+	numarului (registrul EDX) cu 0. Se fac impartiri repetate la baza, pana 
+	cand valoarea din EAX devine 0. Resturile, care vor fi plasate in EDX, 
+	sunt puse in stiva, iar cu ajutorul registrului ESI se retine numarul 
+	de caractere introduse in stiva. Inainte de a fi pus pe stiva, se face 
+	conversia numarului la caracter (daca e cifra, se adauga caracterul '0'; 
+	daca e litera, se adauga caracterul 'a' si se scade 10 pentru ca numarul 
+	10 sa fie litera 'a'). Dupa ce s-au pus toate cifrele noului numar pe stiva, 
+	se iau (in ordinea inversa calculului) si se afiseaza pe ecran, caracter cu 
+	caracter. Se foloseste registrul ESI pentru a extrage toate numerele (pana 
+	cand ESI are valoarea 0). Dupa afisarea caracterelor, se pune un newline si 
+	se trece la urmatorul numar.
+
+  Nota: Am ales folosirea a 64 bits pentru reprezentarea numarului deoarece
+        pentru impartirea la unele numere, exista posibilitatea ca numarul sa 
+		nu intre intr-un registru mai mic de 32 bits. Ex: 600 : 2 = 300 (nu 
+		incape in AX). De asemenea, implementarea este mult mai simpla.
